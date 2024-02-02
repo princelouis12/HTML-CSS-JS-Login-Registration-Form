@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        /* Add your styles here */
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-top: 20px; /* Adjusted margin-top for spacing */
+            margin-bottom: 15px; /* Adjusted margin-bottom for spacing */
+        }
+
+        .remember-me label {
+            margin-left: 10px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 0px;
+            margin-bottom: 2px; /* Adjusted margin-bottom for spacing */
+            display: flex;
+            align-items: center; /* Center align the icon and text */
+            display: none; /* Hide error messages initially */
+        }
+
+        .error-message i {
+            margin-right: 5px; /* Space between icon and text */
+        }
+
+        /* Adjusted margin-top and margin-bottom for email error message on both login and signup forms */
+        #login-email-error,
+        #signup-email-error,
+        #forgot-email-error {
+            margin-top: 2px;
+            margin-bottom: 2px; /* Adjusted margin-bottom for spacing */
+        }
+
+        /* Adjusted margin-top for password error messages on both login and signup forms */
+        #login-password-error,
+        #signup-password-error,
+        #login-provide-password-error {
+            margin-top: 2px;
+        }
+
+        /* Adjusted margin-bottom for full name error message on signup form */
+        #signup-username-error,
+        #signup-email-error,
+        #signup-password-error {
+            margin-bottom: 2px; /* Adjusted margin-bottom for spacing */
+        }
+
+        /* Aligned forgot login details link to the left */
+        .forgot-pass {
+            display: block;
+            text-align: left;
+            margin-top: 10px; /* Adjusted margin-top for spacing */
+            margin-bottom: 10px; /* Adjusted margin-bottom for spacing */
+        }
+
+        /* Additional style for the forgot-form */
+        .forgot-form {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container forms">
+        <!-- Login Form -->
+        <div class="form login">
+            <div class="form-content">
+                <header>Login</header>
+                <form action="#" onsubmit="return validateLogin()">
+                    <div class="field input-field">
+                        <input type="email" id="login-email" placeholder="Username or email address" class="input">
+                        <span class="error-message" id="login-email-error"><i class='bx bx-error-triangle'></i>Please fill out this field.</span>
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" id="login-password" placeholder="Password" class="password">
+                        <span class="error-message" id="login-password-error"><i class='bx bx-error-triangle'></i>Please fill out this field.</span>
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me-login">
+                        <label for="remember-me-login">Remember me</label>
+                    </div>
+
+                    <div class="form-link">
+                        <a href="#" class="forgot-pass" onclick="toggleForgotForm()">Forgot login details?</a>
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Don't have an account? <a href="#" class="link register-link">Register now</a></span>
+                </div>
+            </div>
+
+            <!-- Existing lines and media options -->
+        </div>
+
+        <!-- Registration Form -->
+        <div class="form signup">
+            <div class="form-content">
+                <header>Register</header>
+                <form action="#" onsubmit="return validateSignup()">
+                    <div class="field input-field">
+                        <input type="username" id="signup-username" placeholder="Username" class="input">
+                        <span class="error-message" id="signup-username-error"><i class='bx bx-error-triangle'></i>Username is required.</span>
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="email" id="signup-email" placeholder="Email address" class="input">
+                        <span class="error-message" id="signup-email-error"><i class='bx bx-error-triangle'></i>Email address is required.</span>
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" id="signup-password" placeholder="Create password" class="password">
+                        <span class="error-message" id="signup-password-error"><i class='bx bx-error-triangle'></i>Password is required.</span>
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" placeholder="Confirm password" class="password">
+                        <i class='bx bx-hide eye-icon'></i>
+                    </div>
+
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember-me-signup">
+                        <label for="remember-me-signup">I accept all terms & conditions</label>
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Continue</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Already have an account? <a href="#" class="link login-link">Login here</a></span>
+                </div>
+            </div>
+
+            <!-- Existing lines and media options -->
+        </div>
+
+        <!-- Forgot Password Form -->
+        <div class="form forgot-form">
+            <div class="form-content">
+                <header>Forgot Password</header>
+                <form action="#" onsubmit="return validateForgot()">
+                    <div class="field input-field">
+                        <input type="email" id="forgot-email" placeholder="Email address" class="input">
+                        <span class="error-message" id="forgot-email-error"><i class='bx bx-error-triangle'></i>Please fill out this field.</span>
+                    </div>
+                    <div class="field button-field">
+                        <button type="submit">Recover Email</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Remembered your login details? <a href="#" class="link login-link" onclick="toggleForgotForm()">Login here</a></span>
+                </div>
+            </div>
+            <!-- Existing lines and media options -->
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    <script>
+        function validateLogin() {
+            var email = document.getElementById('login-email').value;
+            var password = document.getElementById('login-password').value;
+            var emailError = document.getElementById('login-email-error');
+            var passwordError = document.getElementById('login-password-error');
+            var isValid = true;
+
+            // Hide error messages initially
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+
+            if (email.trim() === '') {
+                emailError.innerHTML = '<i class="bx bx-error-triangle"></i>Please fill out this field.';
+                emailError.style.display = 'block'; // Display error message
+                isValid = false;
+            }
+
+            if (password.trim() === '') {
+                passwordError.innerHTML = '<i class="bx bx-error-triangle"></i>Please fill out this field.';
+                passwordError.style.display = 'block'; // Display error message
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validateSignup() {
+            var fullName = document.getElementById('signup-username').value;
+            var email = document.getElementById('signup-email').value;
+            var password = document.getElementById('signup-password').value;
+            var fullNameError = document.getElementById('signup-username-error');
+            var emailError = document.getElementById('signup-email-error');
+            var passwordError = document.getElementById('signup-password-error');
+            var isValid = true;
+
+            // Hide error messages initially
+            fullNameError.style.display = 'none';
+            emailError.style.display = 'none';
+            passwordError.style.display = 'none';
+
+            if (fullName.trim() === '') {
+                fullNameError.innerHTML = '<i class="bx bx-error-triangle"></i>Username is required.';
+                fullNameError.style.display = 'block'; // Display error message
+                isValid = false;
+            }
+
+            if (email.trim() === '') {
+                emailError.innerHTML = '<i class="bx bx-error-triangle"></i>Email address is required.';
+                emailError.style.display = 'block'; // Display error message
+                isValid = false;
+            }
+
+            if (password.trim() === '') {
+                passwordError.innerHTML = '<i class="bx bx-error-triangle"></i>Password is required.';
+                passwordError.style.display = 'block'; // Display error message
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validateForgot() {
+            var email = document.getElementById('forgot-email').value;
+            var emailError = document.getElementById('forgot-email-error');
+            var isValid = true;
+
+            // Hide error message initially
+            emailError.style.display = 'none';
+
+            if (email.trim() === '') {
+                emailError.innerHTML = '<i class="bx bx-error-triangle"></i>Please fill out this field.';
+                emailError.style.display = 'block'; // Display error message
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function toggleForgotForm() {
+            var loginForm = document.querySelector('.login');
+            var signupForm = document.querySelector('.signup');
+            var forgotForm = document.querySelector('.forgot-form');
+
+            if (loginForm.style.display === 'block') {
+                loginForm.style.display = 'none';
+                forgotForm.style.display = 'block';
+            } else if (signupForm.style.display === 'block') {
+                signupForm.style.display = 'none';
+                forgotForm.style.display = 'block';
+            } else {
+                loginForm.style.display = 'block';
+                forgotForm.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
